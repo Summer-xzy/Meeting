@@ -1,0 +1,80 @@
+* {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.wrapper {
+    margin: 120px auto 0 auto;
+    padding: 15px;
+    width: 600px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    .searchBar {
+        input {
+            width: 150px;
+            padding: 8px 10px;
+            font-size: 13px;
+            box-shadow: 0 1px 1px rgba(0,0,0,.1) inset;
+            border-radius: 3px;
+            background: #fff;
+            border: 1px solid #ccc;
+            height: 20px;
+            line-height: 20px;
+            color: #777;
+        }
+        span {
+            margin-left: 5px;
+            color: #999;
+            -webkit-font-smoothing: subpixel-antialiased;
+            font-smoothing: subpixel-antialiased;
+        }
+    }
+    .listItem {
+        padding-top: 30px;
+        padding-bottom: 30px; 
+        border-bottom: 1px solid #eee;
+        .itemWrapper {
+            position: relative;
+            padding-left: 60px;
+            img {
+                position: absolute;
+                left: 0;
+                top:0;
+            }
+            .name {
+                color: #999;
+                margin-bottom: 5px;
+            }
+            .des {
+                line-height: 1.2;
+                color: #999;
+                word-wrap: normal;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            button {
+                position: absolute;
+                right: 15px;
+                top: 0px;
+                width: 70px;
+                color: #3e5e00!important;
+                text-shadow: 0 1px 0 rgba(255,255,255,.3);
+                background: linear-gradient(to bottom,#adda4d,#86b846);
+                border: 1px solid #6d8f29;
+                box-shadow: 0 1px 0 rgba(255,255,255,.5) inset,0 1px 0 rgba(0,0,0,.2);
+                font-weight: 400;
+                height: 25px;
+                line-height: 25px;
+                border-radius: 3px;
+                cursor: pointer;
+                box-sizing: border-box;
+                font-size: 12px;
+                text-decoration: none;
+                text-align: center;
+            }
+        }
+    }
+}
