@@ -1,70 +1,78 @@
-var React = require('react');
-var ReactDom = require('react-dom');
-require('../less/meeting.less');
+import React ,{Component} from 'react';
+import ReactDom from 'react-dom';
 
-var Search = require('./search.js');
-var List = require('./list.js');
+import '../less/meeting.less';
+import Search from './search.js';
+import List from './list.js';
 
-var App = React.createClass({
-    getInitialState: function () {
-        return {
+//组件功能：主组件,设置初始状态，被邀请列表为空数组，输入内容为空
+class App extends Component{
+    constructor () {
+      super();
+        this.state = {
             list: [],
             filterText: ''
         }
-    },
-    componentDidMount: function () {
-        var data = this.props.data.invited;
-        var list = [];
-        data.map(function (item, index) {
+    }
+    //遍历数据，给所有数据添加invited：false，并返回到列表中
+    componentDidMount () {
+        const data = this.props.data.invited;
+        
+        let list = [];
+        data.map((item, index)=> {
+          
             item.invited = false;
             list.push(item);
+            
         });
-
         this.setState({
             list: list
         });
 
-    },
-    onChangeInvited: function (id) {
-        var list = this.props.data.invited;
-        var newList = [];
+    }
+    //将已经添加invite的list遍历，然后判断id，如果相同，则将invited置反，并设置list为Newlist
+    onChangeInvited (id) {
+        const list = this.props.data.invited; //获取数据
+        let newList = [];
 
-        newList = list.map(function (item) {
-            if (item.id === id) {
-                item.invited = !item.invited;
+        newList = list.map((item)=> {  //筛选数组数据，得到对象
+            if (item.id === id) {             //如果对象的id和id相等
+                item.invited = !item.invited; //给对象一个invited状态，并将状态置反
             };
-
             return item;
         });
 
         this.setState({
             list: newList
         });
-    },
-    onFilterText: function (text) {
+    }
+    //将输入内容放入filterText，使状态改变
+    onFilterText (text) {
         this.setState({
-            filterText: text
+            filterText: text   //输入内容
         });
-    },
-    render: function () {
-        var data = this.props.data;
-        var filterText = this.state.filterText;
-        var filterData = data;
+    }
+    //输入内容与数据内容匹配
+    render () {
+        const data = this.props.data;   //获取对象
+
+        let filterText = this.state.filterText; //获取输入内容
+        let filterData = data;
         
-        if (filterText) {
-            filterData = {};
-            filterData.invited = data.invited.filter(function (item) {
-                return item.name.indexOf(filterText) !== -1;
-            });
+        if (filterText) {   //如果有输入内容
+            filterData = {};   //将对象设为空
+            filterData.invited = data.invited.filter((item)=> {  //筛选对象
+                return item.name.indexOf(filterText) !== -1;            //如果对象的名字与输入的相同就不等于-1
+          });
         }
         return (
             <div className='wrapper'>
-                <Search data={data} onFilterText={this.onFilterText}/>
-                <List onChangeInvited={this.onChangeInvited} data={filterData}/>
+                <Search data={data} onFilterText={this.onFilterText.bind(this)}/>
+                <List onChangeInvited={this.onChangeInvited.bind(this)} data={filterData}/>
             </div>
         )
     }
-});
+}
 
 var data = {
   "invited": [

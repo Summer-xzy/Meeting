@@ -1,13 +1,13 @@
-var React = require('react'); 
+import React ,{Component} from 'react';
 
-var Item = React.createClass({
-    render: function () {
-        var person = this.props.person;
-        var name = person.name;
-        var url = person.avatarUrl;
-        var des = person.bio;
-        var id = person.id;
-
+//每个对象组件，点击之后改变样式，并将ID传给onChangeInvited
+class Item extends Component{
+    render () {
+        const person = this.props.person; //获取每个对象
+        const name = person.name;         //获取对象name
+        const url = person.avatarUrl;     //图片
+        const des = person.bio;           //对象分组
+        const id = person.id;             //对象ID
         if (person.invited) {
             var style = {
                 background: 'linear-gradient(to bottom,#f8f8f9,#e6e6e8)',
@@ -32,6 +32,6 @@ var Item = React.createClass({
             </li>
         )
     }
-});
+}
 
-module.exports = Item;
+export default Item;

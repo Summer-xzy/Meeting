@@ -1,15 +1,18 @@
-var React = require('react'); 
+import React ,{Component} from 'react';
 
-var Search = React.createClass({
-    onHandleChange: function () {
+//获取输入框的内容，显示邀请的人
+class Search extends Component{
+    //把输入内容传到onFilterText中，使之改变状态
+    onHandleChange () {
         this.props.onFilterText(this.refs._Ip.value);
-    },
-    render: function () {
-        var data = this.props.data.invited;
+    }
+    render () {
+        const data = this.props.data.invited;
 
-        var personRow = [];
-        var truePerson = [];
-        data.forEach(function (item, index) {
+        let personRow = [];
+        let truePerson = [];
+        data.forEach((item, index)=> {
+            //如果小于两人，就把人名都添加到数组中，如果大于两人，只把前两个保留显示
             if (item.invited && index < 2) {
                 personRow.unshift(<span key={index + 100}>{item.name}</span>);
                 truePerson = personRow;
@@ -20,12 +23,12 @@ var Search = React.createClass({
         });
         return (
             <div className='searchBar'>
-                <input ref='_Ip' type='text' placeholder='搜索你要通知的人' onChange={this.onHandleChange}/>
+                <input ref='_Ip' type='text' placeholder='搜索你要通知的人' onChange={this.onHandleChange.bind(this)}/>
                 <span>您已通知 {truePerson}等 {personRow.length}人</span>
             </div>
         )
     }
-});
+}
 
 
-module.exports = Search;
+export default Search;
