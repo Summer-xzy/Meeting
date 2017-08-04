@@ -5,7 +5,7 @@ import '../less/meeting.less';
 import Search from './search.js';
 import List from './list.js';
 
-//组件功能：主组件,设置初始状态，被邀请列表为空数组，输入内容为空
+//组件功能：主组件,设置初始状态，数据列表为空数组，输入内容为空
 class App extends Component{
     constructor () {
       super();
@@ -14,7 +14,7 @@ class App extends Component{
             filterText: ''
         }
     }
-    //遍历数据，给所有数据添加invited：false，并返回到列表中
+    //组件挂在到页面上之后，调用一次。遍历数据，给所有数据添加invited：false，并返回到列表中
     componentDidMount () {
         const data = this.props.data.invited;
         
